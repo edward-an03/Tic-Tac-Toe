@@ -191,6 +191,9 @@ bool Grid::checkForFullGrid()
 	return isFull;
 }
 
+
+Grid ticTacToeGrid; //Creates a grid for tic-tac-toe
+
 void gamePlay(int playerNum, char playerMarker)
 /*
  * This function takes in user input and places a player marker in the given spot on the grid. Then the grid is printed
@@ -212,8 +215,6 @@ void gamePlay(int playerNum, char playerMarker)
 	ticTacToeGrid.printGrid();
 	cout << endl;
 }
-
-Grid ticTacToeGrid; //Creates a grid for tic-tac-toe
 
 int main (void)
 {
