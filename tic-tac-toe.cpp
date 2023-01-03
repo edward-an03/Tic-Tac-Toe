@@ -10,14 +10,14 @@ class Grid
 	public:
 		Grid();
 		~Grid();
-		void setGridData(int row, int column, const char data);
+		void setGrid(const int row, const int column, const char data);
+		char getGrid(const int row, const int column) const;
 		void resetGrid();
-		void printGrid();
-		int labelToRow(const int num);
-		int labelToColumn(const int num);
-		bool checkForOverlap(const int row, const int column);
-		bool checkForWins(char playerMarker);
-		bool checkForFullGrid();
+		void printGrid() const;
+		int labelToRow(const int num) const;
+		int labelToColumn(const int num) const;
+		bool checkForWins(const char playerMarker) const;
+		bool checkForFullGrid() const;
 };
 
 Grid::Grid()
@@ -52,15 +52,31 @@ Grid::~Grid()
 	gridData = NULL;
 }
 
-void Grid::setGridData(int row, int column, const char data)
+void Grid::setGrid(const int row, const int column, const char data)
 /*
- * Setter function. Sets one index at a time
+ * Setter function
  */
 {
 	if (row >= 0 && row < N && column >= 0 && column < N)
 	{
 		gridData[row][column] = data;
 	}
+}
+
+char Grid::getGrid(const int row, const int column) const
+/*
+ * Getter function
+ */
+{
+	if (row >= 0 && row < N && column >= 0 && column < N)
+	{ // This if statement prevents segmentation error caused by referencing the address of an array index out of bounds
+		return gridData[row][column];
+	}
+	else
+	{
+		return 0;
+	}
+	
 }
 
 void Grid::resetGrid()
@@ -77,7 +93,7 @@ void Grid::resetGrid()
 	}
 }
 
-void Grid::printGrid() //TODO: Make it possible to print a 4x4 grid too
+void Grid::printGrid() const //TODO: Make it possible to print a 4x4 grid too
 /* 
  * A print function that shows how the current data is located on the grid
  */
@@ -108,7 +124,7 @@ void Grid::printGrid() //TODO: Make it possible to print a 4x4 grid too
 	
 }
 
-int Grid::labelToRow(const int num)
+int Grid::labelToRow(const int num) const
 /* 
  * returns a row integer that corresponds to one of the nine gridspaces
  * this function works assuming that the grid is labelled (1-9) in the order left to right, top to bottom
@@ -118,7 +134,7 @@ int Grid::labelToRow(const int num)
 	return row;
 }
 
-int Grid::labelToColumn(const int num)
+int Grid::labelToColumn(const int num) const
 /* 
  * returns a column integer that corresponds to one of the nine gridspaces
  * this function works assuming that the grid is labelled (1-9) in the order left to right, top to bottom
@@ -128,32 +144,7 @@ int Grid::labelToColumn(const int num)
 	return column;
 }
 
-bool Grid::checkForOverlap(const int row, const int column)
-/*
- * returns a boolean value that corresponds to whether a particular space on the grid is preoccupied or not
- */
-{
-	if (row < 0 || row > (N-1) || column < 0 || column > (N-1))
-	{ // This if statement prvents segmentation error caused by referencing the address of an array index out of bounds
-		bool isOverlap = true;
-		return isOverlap;
-	}
-	
-	else{
-		if (gridData[row][column]!= ' ')
-		{
-			bool isOverlap = true;
-			return isOverlap;
-		}
-		else
-		{
-			bool isOverlap = false;
-			return isOverlap;
-		}
-	}
-}
-
-bool Grid::checkForWins(char playerMarker)
+bool Grid::checkForWins(const char playerMarker) const //TODO: Create an algorithm that checks for NxN not just 3x3
 /*
  * returns a boolean value that corresponds to whether there are 3 markers (X or O) in a row
  */
@@ -187,7 +178,7 @@ bool Grid::checkForWins(char playerMarker)
 	return wins;
 }
 
-bool Grid::checkForFullGrid()
+bool Grid::checkForFullGrid() const
 /*
  * returns a boolean value that corresponds to whether the grid is full or not
  */
@@ -207,7 +198,7 @@ bool Grid::checkForFullGrid()
 }
 
 
-Grid ticTacToeGrid; //Creates a grid for tic-tac-toe
+Grid ticTacToeGrid; //Creates a grid object for tic-tac-toe
 
 void gamePlay(int playerNum, char playerMarker)
 /*
@@ -217,22 +208,24 @@ void gamePlay(int playerNum, char playerMarker)
 	int playerChoice;
 	int row;
 	int column;
-	bool isOverlap;
-	do {
+	while(true) {
 		cout << "Player " << playerNum << "'s turn. Enter a number (1-9) to place your " << playerMarker << endl;
 		cin >> playerChoice;	
 		if (cin.fail())
 		{
-			cout << "Wrong input. Please enter an integer\n";
+			cout << "Wrong input. Please enter an integer from (1-9)\n";
 			cin.clear();
 			cin.ignore(256,'\n');   // ignore the line change
 		}
 		row = ticTacToeGrid.labelToRow(playerChoice);
 		column = ticTacToeGrid.labelToColumn(playerChoice);
-		isOverlap = ticTacToeGrid.checkForOverlap(row, column); // Function call to see whether space is preoccupied with an X or O
+		char x = ticTacToeGrid.getGrid(row, column);
+		if (x == ' ')
+		{
+			break; //The loop ends if and only if the specified row and column isn't already occupied by an X or O as indicated by ' '
+		}
 	}
-	while (isOverlap == true);
-	ticTacToeGrid.setGridData(row, column, playerMarker);
+	ticTacToeGrid.setGrid(row, column, playerMarker);
 	ticTacToeGrid.printGrid();
 	cout << endl;
 }
@@ -242,14 +235,14 @@ int main (void)
 	cout << "Hello!" << endl;
 	cout << "Welcome to tic-tac-toe. This is a two-player game.\n" << endl;
 	
-	Grid numberedGrid; //Creates a grid strictly for labelling
+	Grid numberedGrid; //Creates a grid object strictly for labelling
 	for (int i=0; i<N; i++)
 	{
 		for (int j=0; j<N; j++)
 		{
 			int number = i*N + j + 1;
 			int ASCII = number + 48; //convert to corresponding ASCII numbers
-			numberedGrid.setGridData(i, j, ASCII); 
+			numberedGrid.setGrid(i, j, ASCII); 
 		}
 	} //Grid is labelled 1-9 from left to right and top to bottom
 	
