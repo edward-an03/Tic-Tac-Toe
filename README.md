@@ -9,4 +9,5 @@ A two-player console (terminal-based) game
 * Abstraction using access specifiers
 * Dynamic Memory Allocation
 * Constructors and Destructors
+* Input stream type checking
 * Create an intuitive user interface
