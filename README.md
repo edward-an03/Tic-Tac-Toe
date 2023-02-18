@@ -1,6 +1,9 @@
 # Tic-Tac-Toe
 A two-player console (terminal-based) game
-
+---
+# Gameplay
+![gameplay]()
+---
 # What I learned
 * The use of arrays and pointers
 * Object Oriented Programming
