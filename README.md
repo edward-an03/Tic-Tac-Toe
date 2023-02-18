@@ -21,4 +21,3 @@ The win screen is shown as below. The user is prompted to play again.
 * Dynamic Memory Allocation
 * Constructors and Destructors
 * Input stream type checking
-* Create an intuitive user interface
