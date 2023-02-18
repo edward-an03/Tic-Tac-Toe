@@ -1,6 +1,6 @@
 # Tic-Tac-Toe
 A two-player console (terminal-based) game
----
+
 # Gameplay
 
 The game starts off as shown below. The grids are labelled and the user can place their X's and O's by typing in the corresponding labels. 
@@ -11,7 +11,7 @@ To prevent unwanted crashes, inputs are checked to ensure that they are valid
 
 The win screen is shown as below. The user is prompted to play again.
 ![win screen](win_screen.png)
----
+
 # What I learned
 * The use of arrays and pointers
 * Object Oriented Programming
