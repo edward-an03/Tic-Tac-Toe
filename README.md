@@ -7,6 +7,7 @@ The game starts off as shown below. The grids are labelled and the user can plac
 ![start](game_start.png)
 ---
 To prevent unwanted crashes, inputs are checked to ensure that they are valid
+<br>
 ![validInputs](input_checking.png)
 ---
 The win screen is shown as below. The user is prompted to play again.
