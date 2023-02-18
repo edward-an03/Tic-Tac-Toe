@@ -2,7 +2,15 @@
 A two-player console (terminal-based) game
 ---
 # Gameplay
-![gameplay]()
+
+The game starts off as shown below. The grids are labelled and the user can place their X's and O's by typing in the corresponding labels. 
+![start](game_start.png)
+
+To prevent unwanted crashes, inputs are checked to ensure that they are valid
+![validInputs](input checking.png)
+
+The win screen is shown as below. The user is prompted to play again.
+![win screen](win_screen.png)
 ---
 # What I learned
 * The use of arrays and pointers
