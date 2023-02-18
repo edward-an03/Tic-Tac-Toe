@@ -3,7 +3,7 @@ A two-player console (terminal-based) game
 
 # Gameplay
 
-The game starts off as shown below. The grids are labelled and the user can place their X's and O's by typing in the corresponding labels. 
+<p>The game starts off as shown below. The grids are labelled and the user can place their X's and O's by typing in the corresponding labels.</p>
 ![start](game_start.png)
 ---
 To prevent unwanted crashes, inputs are checked to ensure that they are valid
